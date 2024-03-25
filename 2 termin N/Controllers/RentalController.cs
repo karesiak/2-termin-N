@@ -29,37 +29,58 @@ namespace _2_termin_N.Controllers
             {
                 if (model.StartDate > model.EndDate)
                 {
-                    ModelState.AddModelError("EndDate", "End date must be later than start date.");
+                    ModelState.AddModelError("EndDate", "Data zakończenia musi być późniejsza niż data rozpoczęcia.");
                     return View(model);
                 }
 
-                var totalDays = (model.EndDate - model.StartDate).Days;
-                decimal pricePerDay = model.WarehouseId switch
-                {
-                    "A5" or "B5" => 2m,
-                    "A10" or "B10" => 3m,
-                    "A20" => 5m,
-                    _ => throw new ArgumentException("Invalid warehouse ID")
-                };
+                var isNotAvailable = rentals.Any(rental =>
+                    rental.WarehouseId == model.WarehouseId &&
+                    !(model.EndDate <= rental.StartDate || model.StartDate >= rental.EndDate));
 
-                var rental = new WarehouseRental
+                if (isNotAvailable)
                 {
-                    UserId = model.UserId,
+                    ModelState.AddModelError("WarehouseId", "Wybrany magazyn nie jest dostępny w wybranym okresie.");
+                    return View(model);
+                }
+
+                decimal pricePerDay = 0m;
+                switch (model.WarehouseId)
+                {
+                    case "A5":
+                    case "B5":
+                        pricePerDay = 2m;
+                        break;
+                    case "A10":
+                    case "B10":
+                        pricePerDay = 3m;
+                        break;
+                    case "A20":
+                        pricePerDay = 5m;
+                        break;
+                }
+
+                var totalDays = (model.EndDate - model.StartDate).Days + 1; // +1, aby uwzględnić także dzień rozpoczęcia
+                var totalCost = totalDays * pricePerDay;
+
+                var newRental = new WarehouseRental
+                {
                     WarehouseId = model.WarehouseId,
+                    UserId = model.UserId,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    TotalCost = totalDays * pricePerDay
+                    TotalCost = totalCost
                 };
 
-                rentals.Add(rental);
+                rentals.Add(newRental);
 
-                return RedirectToAction("Success");
+                return RedirectToAction("Confirmation", new { id = newRental.WarehouseId });
             }
 
             return View(model);
         }
 
-        public ActionResult Success()
+
+        public ActionResult Confirmation()
         {
             return View();
         }

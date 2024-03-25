@@ -1,0 +1,31 @@
+﻿@model List<_2_termin_N.Models.WarehouseRental>
+
+@{
+    Layout = "_Layout"; 
+}
+
+<h2>Lista Wynajętych Magazynów</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Identyfikator Magazynu</th>
+            <th>Identyfikator Użytkownika</th>
+            <th>Data Rozpoczęcia</th>
+            <th>Data Zakończenia</th>
+            <th>Całkowity Koszt</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.WarehouseId</td>
+                <td>@rental.UserId</td>
+                <td>@rental.StartDate.ToString("d")</td>
+                <td>@rental.EndDate.ToString("d")</td>
+                <td>@rental.TotalCost zł</td>
+            </tr>
+        }
+    </tbody>
+</table>
