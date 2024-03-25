@@ -59,7 +59,7 @@ namespace _2_termin_N.Controllers
                         break;
                 }
 
-                var totalDays = (model.EndDate - model.StartDate).Days + 1; // +1, aby uwzględnić także dzień rozpoczęcia
+                var totalDays = (model.EndDate - model.StartDate).Days + 1; 
                 var totalCost = totalDays * pricePerDay;
 
                 var newRental = new WarehouseRental
