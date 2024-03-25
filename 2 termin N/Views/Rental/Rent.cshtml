@@ -1,0 +1,38 @@
+﻿@model RentalFormModel
+@{
+    ViewBag.Title = "Rent Warehouse";
+}
+
+<h2>Rent Warehouse</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartDate)
+        @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.StartDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndDate)
+        @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+        @Html.ValidationMessageFor(model => model.EndDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserId)
+        @Html.TextBoxFor(model => model.UserId, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.WarehouseId)
+        @Html.DropDownListFor(model => model.WarehouseId, new SelectList(RentalFormModel.AvailableWarehouses), "Choose...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.WarehouseId)
+    </div>
+
+    <button type="submit" class="btn btn-default">Rent</button>
+}
+
