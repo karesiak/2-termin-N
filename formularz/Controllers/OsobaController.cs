@@ -1,5 +1,7 @@
 ﻿using formularz.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
+
 
 namespace formularz.Controllers
 {
@@ -10,26 +12,29 @@ namespace formularz.Controllers
             return View();
         }
 
-       
         [HttpPost]
         public ActionResult Index(Osoba osoba)
         {
             if (ModelState.IsValid)
             {
-                // Zapisanie danych z formularza do TempData
-                TempData["Osoba"] = osoba;
+                // Serializacja obiektu Osoba do JSON i zapisanie w TempData przy użyciu System.Text.Json
+                TempData["Osoba"] = JsonSerializer.Serialize(osoba);
                 return RedirectToAction("ZapiszOsobe");
             }
             return View(osoba);
         }
 
 
+
         public ActionResult ZapiszOsobe()
         {
-            // Pobranie obiektu Osoba z TempData
-            Osoba osoba = TempData["Osoba"] as Osoba;
+            Osoba osoba = null;
 
-            // Sprawdzamy, czy obiekt faktycznie istnieje
+            if (TempData["Osoba"] is string osobaJson)
+            {
+                osoba = JsonSerializer.Deserialize<Osoba>(osobaJson);
+            }
+
             if (osoba != null)
             {
                 // Przekazanie obiektu Osoba do widoku
@@ -41,7 +46,6 @@ namespace formularz.Controllers
                 return RedirectToAction("Index");
             }
         }
-
 
     }
 }
