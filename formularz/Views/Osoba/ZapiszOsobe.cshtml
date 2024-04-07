@@ -1,0 +1,10 @@
+﻿@model formularz.Models.Osoba
+
+<h2>Dane osoby:</h2>
+<ul>
+    <li>Imię: @Model.Imie</li>
+    <li>Nazwisko: @Model.Nazwisko</li>
+    <li>Email: @Model.Email</li>
+</ul>
+
+@Html.ActionLink("Wróć do formularza", "Index")

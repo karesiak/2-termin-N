@@ -1,0 +1,16 @@
+﻿@model formularz.Models.Osoba
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model=>model.Imie)
+    @Html.TextBoxFor(model=>model.Imie)
+    <br />
+    @Html.LabelFor(model=>model.Nazwisko)
+    @Html.TextBoxFor(model=>model.Nazwisko)
+    <br />
+    @Html.LabelFor(model=>model.Email)
+    @Html.TextBoxFor(model=>model.Email)
+    <br />
+    
+    <input type="submit" value="Wyślij">
+}
