@@ -1,0 +1,28 @@
+﻿@model Oceny.Models.Ocena
+
+<h2>Dodaj ocenę</h2>
+
+<form asp-action="AddOcena" method="post">
+    
+    <div class="form-group">
+        <label asp-for="Przedmiot">Przedmiot</label>
+        <select asp-for="Przedmiot" asp-items="@(new SelectList(ViewBag.Przedmioty))" class="form-control"></select>
+        <span asp-validation-for="Przedmiot" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NrAlbumu">Nr albumu</label>
+        <input asp-for="NrAlbumu" class="form-control" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ImieNazwiskoStudenta">Imię i nazwisko studenta</label>
+        <input asp-for="ImieNazwiskoStudenta" class="form-control" />
+        <span asp-validation-for="Przedmiot" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WartoscOceny">Ocena</label>
+        <select asp-for="WartoscOceny" asp-items="@(new SelectList(ViewBag.Oceny))" class="form-control"></select>
+        <span asp-validation-for="Przedmiot" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+</form>

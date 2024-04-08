@@ -1,0 +1,17 @@
+﻿@model Data.Models.FormData
+
+<h2>Wprowadź dane</h2>
+
+<form asp-action="Form" method="post" novalidate>
+    <div class="form-gropu">
+        <label for="data1">Dane 1</label>
+        <input type="text" name="Data1" asp-for="Data1" class="form-control">
+        <span asp-validation-for="Data1" class="text-danger"></span>
+    </div>
+    <div class="form-gropu">
+        <label for="data2">Dane 2</label>
+        <input type="text" name="Data2" asp-for="Data2" class="form-control">
+        <span asp-validation-for="Data2" class="text-danger"></span>
+    </div>
+    <button type="submit">Wyślij</button>
+</form>

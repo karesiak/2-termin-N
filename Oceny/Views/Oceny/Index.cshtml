@@ -1,0 +1,29 @@
+﻿@model Dictionary<string, List<Oceny.Models.Ocena>>
+
+<h2>Lista ocen</h2>
+<a asp-controller="Oceny" asp-action="AddOcena" class="btn btn-primary">Dodaj nową ocenę</a>
+
+
+@foreach (var grupa in Model)
+{
+    <h3>@grupa.Key</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nr albumu</th>
+                <th>Ocena</th>
+                <th>Data wpisania</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ocena in grupa.Value)
+            {
+                <tr class="@(ocena.WartoscOceny == 2 ? "text-danger" : ocena.WartoscOceny == 5 ? "text-success" : "text-dark")">
+                    <td>@ocena.NrAlbumu</td>
+                    <td>@ocena.WartoscOceny</td>
+                    <td>@ocena.DataWpisania.</td>
+                </tr>
+            }
+        </tbody>u
+    </table>
+}

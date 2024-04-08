@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Data.Models.FormData>
+
+<h2>Wyniki</h2>
+<div><a asp-controller="Form" asp-action="Form" class="btn btn-primary">Dodaj Nowy</a></div>
+@foreach (var item in Model)
+{
+    <div>
+        <p>Dane 1: @item.Data1</p>
+        <p>Dane 2: @item.Data2</p>
+    </div>
+}
