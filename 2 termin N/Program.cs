@@ -28,7 +28,7 @@ namespace _2_termin_N
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Rental}/{action=Rent}/{id?}");
 
             app.Run();
         }

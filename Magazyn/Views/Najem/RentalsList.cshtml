@@ -1,0 +1,31 @@
+﻿@model List<Magazyn.Models.WarehouseRental>
+
+@{
+    ViewData["Title"] = "Lista Wynajmów";
+}
+<div>
+    <a asp-action="CreateForm">Wynajmij kolejny magazyn</a>
+</div>
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Data Rozpoczęcia</th>
+            <th>Data Zakończenia</th>
+            <th>Typ Magazynu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var huj in Model)
+        {
+            <tr>
+                <td>@huj.Id</td>
+                <td>@huj.DataStart</td>
+                <td>@huj.DataEnd</td>
+                <td>@huj.TypMagazyn</td>
+            </tr>
+        }
+    </tbody>
+</table>

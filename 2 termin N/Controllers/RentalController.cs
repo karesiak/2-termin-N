@@ -7,12 +7,7 @@ namespace _2_termin_N.Controllers
 {
     public class RentalController : Controller
     {
-        private static readonly List<WarehouseRental> rentals = new List<WarehouseRental>();
-
-        public ActionResult Index()
-        {
-            return View();
-        }
+        private static readonly List<WarehouseRental> rentals = new List<WarehouseRental>();       
 
         public ActionResult Rent()
         {

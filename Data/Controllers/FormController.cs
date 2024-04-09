@@ -15,7 +15,15 @@ namespace Data.Controllers
         [HttpGet]
         public IActionResult Form()
         {
-            return View();
+            // Przygotowanie modelu z domyślną listą opcji (lub inicjalizacja na podstawie logiki aplikacji)
+            var formData = new FormData()
+            {
+                // Zakładając, że FormData.Opcje jest już zdefiniowane static lub inaczej w modelu,
+                // nie potrzebujemy dodatkowo inicjalizować listy opcji tutaj.
+                // Przykład: formData.Opcje = PobierzOpcje(); jeśli lista opcji ma być dynamiczna.
+            };
+
+            return View(formData);
         }
 
         [HttpPost]

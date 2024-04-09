@@ -1,0 +1,51 @@
+Stwórz projekt aplikacji MVC w ASP.NET zawieraj¹cy:
+
+1. Formularz z datami (bez godziny) rozpoczêcia i zakoñczenia najmu magazynu, identyfikatorem u¿ytkownika wynajmuj¹cego sk³adaj¹cego siê z 6 cyfr oraz lista z 5
+dostêpnymi magazynami: A5, B5, A10, B10, A20. Liczba po oznaczeniu oznacza powierzchnie magazynu. Formularz powinien walidowaæ dane: data rozpoczêcia nie mo¿e
+byæ póŸniejsza  od daty zakoñczenia. Zatwierdzenie formularza powinno skutkowaæ stron¹ z informacj¹ o powodzeniu wynajmu, jeœli w terminie jest dostêpny wybrany
+magazyn lub niepowodzenie, jeœli magazyn jest ju¿ zajêty, Strona  powinna zawieraæ link do strony z list¹ wynajêtych magazynów. 
+
+2. Lista wynajêtych magazynów w postaci nazwy i identyfikatora klienta oraz kwot¹ do zap³aty, która wynika z liczby dni wynajmu pomno¿onych przez cenê za jeden dzieñ:
+
+ - dla magazynów A5, B5 to 2z³
+
+ - dla magazynów A10, B10 to 3 z³ 
+
+ - dla magazynu A20 to 5  z³.
+
+W projekcie w pliku Program.cs wpisz w komentarzu swoje imiê i nazwisko!!!
+
+Przeœlij skompresowany projekt (bez katalogów bin i obj!).
+
+
+
+
+
+
+Stwórz aplikacjê ASP.NET, która:
+
+1. Zawiera formularz do publikowania oceny opisanej przez:
+
+    - wartoœæ w skali od 2 do 5 (wybór jednej z czterech wartoœci: 2, 3, 4,5)
+
+    - nazwê przedmiotu( do wyboru jeden z czterech dowolnych przedmiotów, proszê podaæ przyk³adowe przedmioty)
+
+    - nr albumu studenta (dowolna liczba 5 cyfrowa)
+
+    - imiê i nazwisko studenta
+
+Ka¿da ocena ma tak¿e datê, ale powinna byæ dodawana automatycznie po zatwierdzeniu formularza. U¿ytkownik nie powinien tej daty wpisywaæ!  
+
+Ocena powinna zostaæ zapisana jeœli student z tego przedmiotu nie ma jeszcze oceny. Próba dodania drugiej oceny dla tego samego studenta z tego samego przedmiotu powinna byæ odrzucana statusem BadRequest lub komunikatem b³êdu w formularzu.
+
+2. Zawiera listê ocen podzielon¹ na przedmioty. Oceny z ka¿dego przedmiotu powinny byæ zawarte w osobnej tabeli. Nad tabel¹ nazwa przedmiot, w tabeli:
+
+- nr albumu
+
+- ocena,
+
+- data wpisania oceny.
+
+Oceny 2 powinny byæ wyró¿nione kolorem czerwonym (np. klas¹ "text-danger"), oceny 5 kolorem zielonym (np. klas¹ "text-success"), pozosta³e czarnym.
+
+3. Ka¿dy nr albumu w liœcie ocen powinien byæ linkiem, który otwiera now¹ stronê z imieniem i nazwiskiem studenta.

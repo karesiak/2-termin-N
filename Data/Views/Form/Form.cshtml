@@ -13,5 +13,13 @@
         <input type="text" name="Data2" asp-for="Data2" class="form-control">
         <span asp-validation-for="Data2" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label for="WybranaOpcja">Wybierz opcję</label>
+        <select asp-for="WybranaOpcja" asp-items="@(new SelectList(Model.Opcje))" class="form-control" required>
+            <option value="">-- Wybierz opcję --</option>
+        </select>
+        <span asp-validation-for="WybranaOpcja" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Wyślij</button>
     <button type="submit">Wyślij</button>
 </form>

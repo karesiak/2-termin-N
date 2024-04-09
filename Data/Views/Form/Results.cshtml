@@ -4,8 +4,13 @@
 <div><a asp-controller="Form" asp-action="Form" class="btn btn-primary">Dodaj Nowy</a></div>
 @foreach (var item in Model)
 {
-    <div>
-        <p>Dane 1: @item.Data1</p>
-        <p>Dane 2: @item.Data2</p>
-    </div>
+    <table>
+    <thead>
+        <tr>
+            <th>Dane 1: @item.Data1 </th>           
+            <th>Dane 2: @item.Data2</th>
+
+        </tr>
+    </thead>
+    </table>
 }

@@ -16,14 +16,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var ocena in grupa.Value)
+            @foreach (var item in grupa.Value)
             {
-                <tr class="@(ocena.WartoscOceny == 2 ? "text-danger" : ocena.WartoscOceny == 5 ? "text-success" : "text-dark")">
-                    <td>@ocena.NrAlbumu</td>
-                    <td>@ocena.WartoscOceny</td>
-                    <td>@ocena.DataWpisania.</td>
+                <tr class="@(item.WartoscOceny == 2 ? "text-danger" : item.WartoscOceny == 5 ? "text-success" : "text-dark")">
+                    <td>@item.NrAlbumu</td>
+                    <td>@item.WartoscOceny</td>
+                    <td>@item.DataWpisania.</td>
                 </tr>
             }
-        </tbody>u
+        </tbody>
     </table>
 }

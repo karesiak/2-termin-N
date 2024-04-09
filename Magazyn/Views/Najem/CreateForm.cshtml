@@ -1,0 +1,42 @@
+﻿
+@model Magazyn.Models.Najem
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="CreateForm" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Id" class="control-label"></label>
+        <input asp-for="Id" class="form-control" />
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataStart" class="control-label"></label>
+        <input asp-for="DataStart" class="form-control" type="date" />
+        <span asp-validation-for="DataStart" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="DataEnd" class="control-label"></label>
+        <input asp-for="DataEnd" class="form-control" type="date" />
+        <span asp-validation-for="DataEnd" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TypMagazyn" class="control-label"></label>
+        <select asp-for="TypMagazyn" class="form-control" asp-items="Html.GetEnumSelectList<Magazyn.Models.Typ>()"></select>
+        <span asp-validation-for="TypMagazyn" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
