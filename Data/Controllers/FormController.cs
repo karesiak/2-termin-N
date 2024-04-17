@@ -7,10 +7,6 @@ namespace Data.Controllers
     {
         private static List<FormData> submittedData = new List<FormData>();
 
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult Form()

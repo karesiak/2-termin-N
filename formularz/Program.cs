@@ -28,7 +28,8 @@ namespace formularz
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Osoba}/{action=Index}/{id?}");
+
 
             app.Run();
         }

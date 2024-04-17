@@ -2,15 +2,23 @@
 
 <h2>Wyniki</h2>
 <div><a asp-controller="Form" asp-action="Form" class="btn btn-primary">Dodaj Nowy</a></div>
-@foreach (var item in Model)
-{
-    <table>
+
+<table class="table">
     <thead>
         <tr>
-            <th>Dane 1: @item.Data1 </th>           
-            <th>Dane 2: @item.Data2</th>
-
+            <th>Dane 1</th>
+            <th>Dane 2</th>
         </tr>
     </thead>
-    </table>
-}
+
+<tbody>
+    @foreach (var item in Model)
+    {   
+            <tr>
+                <td>@item.Data1 </td>           
+                <td>@item.Data2</td>
+
+            </tr>
+    }
+    ></tbody>
+</table>

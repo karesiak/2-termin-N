@@ -1,0 +1,13 @@
+﻿@model IEnumerable<NoteApp.Models.Note>
+
+<h2>List of Notes</h2>
+
+<ul>
+    @foreach (var note in Model)
+    {
+        <li>
+            <strong>@Html.DisplayFor(modelItem => note.Title)</strong>
+            <p>@Html.DisplayFor(modelItem => note.Content)</p>
+        </li>
+    }
+</ul>

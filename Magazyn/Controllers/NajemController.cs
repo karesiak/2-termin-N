@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Magazyn.Models; // Upewnij się, że zaimportowałeś przestrzeń nazw swojego modelu
+using System;
+using System.Collections.Generic;
 
 namespace Magazyn.Controllers
 {
@@ -7,42 +9,70 @@ namespace Magazyn.Controllers
     {
         private static readonly List<WarehouseRental> rentals = new List<WarehouseRental>();
 
-        // Wyświetla formularz
+        // Metoda do obliczania kosztu wynajmu
+        private decimal CalculateRentCost(DateTime startDate, DateTime endDate, string warehouseType)
+        {
+            int totalDays = (endDate - startDate).Days + 1; // Uwzględnienie także dnia rozpoczęcia
+            decimal pricePerDay;
+
+            switch (warehouseType)
+            {
+                case "A5":
+                case "B5":
+                    pricePerDay = 2m;
+                    break;
+                case "A10":
+                case "B10":
+                    pricePerDay = 3m;
+                    break;
+                case "A20":
+                    pricePerDay = 5m;
+                    break;
+                default:
+                    throw new ArgumentException("Nieznany typ magazynu");
+            }
+
+            return totalDays * pricePerDay;
+        }
+
         [HttpGet]
         public IActionResult CreateForm()
         {
-            var model = new Najem(); // Tworzy nową instancję modelu Najem
-            return View(model); // Przekazuje model do widoku
+            var model = new Najem();
+            return View(model);
         }
 
-        // Przetwarza dane z formularza
         [HttpPost]
-        public IActionResult CreateForm(Najem model) // Odbiera model Najem
+        public IActionResult CreateForm(Najem model)
         {
             if (ModelState.IsValid)
             {
-                // Przekonwertuj model Najem na WarehouseRental
-                var huj = new WarehouseRental
+                if (model.DataStart >= model.DataEnd)
                 {
-                    // Załóżmy, że obie klasy mają te same nazwy i typy pól
-                    Id = model.Id, // Musisz dostosować, jak mapujesz Id, jeśli są różne
-                    DataStart = model.DataStart.ToString("yyyy-MM-dd"),
+                    ModelState.AddModelError("", "Data rozpoczęcia musi być wcześniejsza niż data zakończenia.");
+                    return View(model);
+                }
+                // Użyj ToString() do konwersji TypMagazyn z enum na string
+                string warehouseType = model.TypMagazyn.ToString();
+                var rentalCost = CalculateRentCost(model.DataStart, model.DataEnd, warehouseType); // Teraz przekazujemy string
+
+                var rental = new WarehouseRental
+                {
+                    Id = model.Id,
+                    DataStart = model.DataStart.ToString("yyyy-MM-dd"), // Zakładamy, że format daty jest odpowiedni
                     DataEnd = model.DataEnd.ToString("yyyy-MM-dd"),
-
-                    TypMagazyn = model.TypMagazyn.ToString(),
-
+                    TypMagazyn = warehouseType, // Tutaj również przekazujemy wartość jako string
+                    Koszt = rentalCost // Przypisanie obliczonego kosztu
                 };
 
-                // Dodaj przekonwertowany obiekt do listy
-                rentals.Add(huj);
+                rentals.Add(rental);
 
-                // Przekieruj do akcji Sukces
                 return RedirectToAction("Sukces");
             }
 
-            // Jeśli model nie jest prawidłowy, wyświetl formularz ponownie
             return View(model);
         }
+
 
         public IActionResult Sukces()
         {
